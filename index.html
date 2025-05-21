@@ -1,0 +1,186 @@
+<!-- Task Title: Student Marks Management System
+�� Description:
+User form se student ka naam aur marks input karega. Jab user &quot;Add Student&quot; button pe click
+karega:
+1. Input values validate hongi.
+2. Name string array mein add hoga.
+3. Marks number array mein add honge.
+4. Neeche list show hogi jahan sab students ke naam aur marks dikhaye jayenge.
+5. Total students aur average marks bhi show honge.
+
+Task Title: To-Do List Manager
+
+�� Description:
+User ek task (kaam) likh kar &quot;Add Task&quot; button pe click karega. Har dafa:
+1. Input value validate hogi (khaali string allow nahi).
+2. Task ko ek array mein store kiya jayega.
+3. Neeche ek list mein sab tasks dikhaye jaayenge.
+4. Total tasks ka count show hoga.
+5. &quot;Clear All&quot; button se sab tasks delete ho jaayenge. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        button:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    #student{
+            padding-left: 20px;
+            list-style-type: none;
+            margin-left:40% ;
+           
+        }
+        #marks{
+            padding-left: 20px;
+            list-style-type: none;
+            
+           
+        }
+
+        ul li {
+            background-color: #f1f1f1;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        #average {
+            font-size: 16px;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Student Marks Tracker</h3>
+
+        <foam>
+            <input id="Name" type="text" placeholder="Enter Student Name">
+            <input id="Marks" type="number" placeholder="Enter Total Marks">
+            <button id="Add">Add</button>
+        </foam>
+
+        <h4 style="text-align: center;">All Student Names and Marks</h4>
+        <ul id="student">
+          
+        </ul>
+        <ul id="marks">
+           
+        </ul>
+
+        <p id="result"> </p>
+        <p id="average"></p> 
+    </div>
+
+    <script>
+        let NameInput = document.getElementById("Name");
+        let MarksInput = document.getElementById("Marks");
+        var studentList = document.getElementById("student");
+        var marksList = document.getElementById("marks");
+        let p = document.getElementById("result");
+        let avgP = document.getElementById("average");
+        let studentName = [];
+        let studentMarks = [];
+        let studentCount = 0;
+        let totalMarks = 0;
+
+        document.getElementById("Add").addEventListener("click", function () {
+            if (NameInput.value === "" || MarksInput.value === "") {
+                alert("Please fill in both fields.");
+                return;
+            }
+
+            studentName.push(NameInput.value);
+            studentMarks.push(MarksInput.value);
+
+            NameInput.value = "";
+            MarksInput.value = "";
+
+            console.log("Student Names:", studentName);
+            console.log("Student Marks:", studentMarks);
+
+            studentList.style.display = 'inline-block';
+            marksList.style.display = 'inline-block';
+
+            let nameLi = document.createElement("li");
+            nameLi.textContent = studentName[studentName.length - 1];
+            studentList.appendChild(nameLi);
+
+            let marksLi = document.createElement("li");
+            marksLi.textContent = studentMarks[studentMarks.length - 1];
+            marksList.appendChild(marksLi);
+
+            ++studentCount;
+            totalMarks += Number(studentMarks[studentMarks.length - 1]);
+            let averageMarks = totalMarks / studentCount;
+
+            console.log(studentCount);
+            p.innerHTML = `Total students: ${studentCount}`;
+            avgP.innerHTML = `Average marks: ${averageMarks.toFixed(2)}`;
+        });
+    </script>
+</body>
+
+</html>
